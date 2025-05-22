@@ -1,0 +1,34 @@
+---
+import BaseLayout from "@components/base/BaseLayout.astro";
+import CanchaCard from "@components/canchas/CanchaCard.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+import type { CanchasEntry } from "@/types";
+
+interface Props {
+  entryIndex: CanchasEntry;
+  entries: CanchasEntry[];
+  pageIndex: number;
+  pageCount: number;
+}
+
+const { entryIndex, entries } = Astro.props;
+---
+
+<BaseLayout
+
+>
+  <PageHeader  />
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        {
+          entries.map((entry) => (
+            <div class="md:col-6 lg:col-4 h-min p-2">
+              <CanchaCard entry={entry} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

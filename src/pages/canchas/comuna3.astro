@@ -1,11 +1,14 @@
 ---
-import CollectionLayout from "@components/recipes/CollectionLayout.astro";
+import CollectionLayout from "@components/canchas/CollectionLayout.astro";
 import { getIndex, getEntries } from "@lib/contentParser";
 import { sortByDate } from "@lib/sortFunctions";
-import type { RecipesEntry } from "@/types";
+import type { CanchasEntry } from "@/types";
 
-const entryIndex = (await getIndex("recipes")) as RecipesEntry;
-const entries = (await getEntries("recipes", sortByDate)) as RecipesEntry[];
+const entryIndex = (await getIndex("canchas")) as CanchasEntry;
+const entries = (await getEntries("canchas", sortByDate)) as CanchasEntry[];
+
+// Optionally filter entries for Comuna 3 if needed, e.g. by a field in frontmatter
+// const entriesComuna3 = entries.filter(e => e.data.comuna === 3);
 
 const { slug } = Astro.params;
 

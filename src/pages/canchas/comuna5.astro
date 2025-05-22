@@ -1,0 +1,25 @@
+---
+import CollectionLayout from "@components/canchas/CollectionLayout.astro";
+import { getIndex, getEntries } from "@lib/contentParser";
+import { sortByDate } from "@lib/sortFunctions";
+import type { CanchasEntry } from "@/types";
+
+const entryIndex = (await getIndex("canchas")) as CanchasEntry;
+const entries = (await getEntries("canchas", sortByDate)) as CanchasEntry[];
+
+const { slug } = Astro.params;
+
+const entriesPerPage = 1;
+const currentPageIndex = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
+const pageCount = Math.ceil(entries.length / entriesPerPage);
+const indexOfLastEntry = currentPageIndex * entriesPerPage;
+const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
+const currentEntries = entries.slice(indexOfFirstEntry, indexOfLastEntry);
+---
+
+<CollectionLayout
+  entryIndex={entryIndex}
+  entries={currentEntries}
+  pageIndex={currentPageIndex}
+  pageCount={pageCount}
+/>
