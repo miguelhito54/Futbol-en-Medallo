@@ -7,17 +7,11 @@ import type { CanchasEntry } from "@/types";
 const entryIndex = (await getIndex("canchas")) as CanchasEntry;
 const entries = (await getEntries("canchas", sortByDate)) as CanchasEntry[];
 
-// Optionally filter entries for Comuna 3 if needed, e.g. by a field in frontmatter
-// const entriesComuna3 = entries.filter(e => e.data.comuna === 3);
+// Filter only brasilia.md for comuna3
+const currentEntries = entries.filter(e => e.id === "comuna3/brasilia");
 
-const { slug } = Astro.params;
-
-const entriesPerPage = 1;
-const currentPageIndex = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
-const pageCount = Math.ceil(entries.length / entriesPerPage);
-const indexOfLastEntry = currentPageIndex * entriesPerPage;
-const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-const currentEntries = entries.slice(indexOfFirstEntry, indexOfLastEntry);
+const currentPageIndex = 1;
+const pageCount = 1;
 ---
 
 <CollectionLayout

@@ -1,7 +1,7 @@
 ---
-title: El Rompoy 
-description: Calle 122 con Carrera 36, Comuna 1 - Popular, Medellín, Antioquia
-image: ""
+title: Antonio Nariño
+description: Calle 65 #34-50, Comuna 13 - San Javier, Medellín, Antioquia
+image: "@assets/canchas/comuna13/antonionarino/photo1.jpg"
 author: jane-doe
 prepTime: 40
 servings: 4
@@ -9,7 +9,7 @@ diet: Vegan
 
 Direccion:
   list:
-    -  
+    - Calle 65 #34-50, San Javier
     - Bell peppers (red, yellow, green)
     - Carrots
     - Broccoli florets
@@ -49,8 +49,8 @@ instructions:
   - Serve the stir-fry over cooked rice, garnished with green onions, sesame seeds, and a drizzle of additional soy sauce if desired.
 
 notes:
-  - You can use any mix of vegetables you like or have on hand.
-  - For a spicier version, add some chili flakes or a dash of sriracha to the sauce.
-  - If you're not into tofu, this dish can easily be made with tempeh or even seitan.
-  - Make sure the rice is cooked and ready before starting the stir-fry to save time.
+  - Puedes usar cualquier mezcla de vegetales que tengas a mano.
+  - Para una versión más picante, añade ají o sriracha.
+  - Si no te gusta el tofu, puedes usar tempeh o seitán.
+  - Asegúrate de tener el arroz listo antes de comenzar el salteado.
 ---

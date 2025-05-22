@@ -7,8 +7,10 @@ import type { CanchasEntry } from "@/types";
 const entryIndex = (await getIndex("canchas")) as CanchasEntry;
 const entries = (await getEntries("canchas", sortByDate)) as CanchasEntry[];
 
-// Filter only aranjuez.md for comuna4
-const currentEntries = entries.filter(e => e.id === "comuna4/aranjuez");
+// Only show campoamor.md and guayabal.md for comuna15
+const currentEntries = entries.filter(
+  e => e.id === "comuna15/campoamor" || e.id === "comuna15/guayabal"
+);
 
 const currentPageIndex = 1;
 const pageCount = 1;
