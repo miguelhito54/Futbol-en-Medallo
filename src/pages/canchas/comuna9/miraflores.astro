@@ -1,0 +1,92 @@
+---
+import BaseLayout from "@components/base/BaseLayout.astro";
+import type { CanchasEntry } from "@/types";
+import { getEntry, render } from "astro:content";
+import EntryHeader from "@components/common/EntryHeader.astro";
+
+const entry = await getEntry("canchas", "comuna9/miraflores") as CanchasEntry;
+const { Content, headings } = await render(entry);
+const { title } = entry.data;
+
+// Custom cancha data for Comuna 9 - Miraflores
+const canchaInfo = {
+  nombre: "Miraflores | Cancha de fútbol en grama sintética Unidad Deportiva Miraflores",
+  direccion: "Calle 49 #28-50, Barrio Miraflores, Comuna 9 - Buenos Aires, Medellín, Antioquia",
+  reservas: "3699000",
+  historia:
+    "La cancha Miraflores, construida en 1915, es la más antigua de Medellín y ha sido un epicentro del deporte en el oriente de la ciudad. A lo largo de los años, ha sido testigo del crecimiento deportivo de la comunidad y ha visto pasar generaciones de futbolistas que han dejado huella en el ámbito local y nacional.",
+  equipos: [
+    "Clubes históricos y equipos juveniles que han formado parte del desarrollo del fútbol en la ciudad."
+  ]
+};
+
+const gallery = [
+  { src: "/src/assets/canchas/comuna9/miraflores/photo1.jpg", alt: "Miraflores Photo 1", size: "w-full h-96 md:h-[32rem]" },
+  { src: "/src/assets/canchas/comuna9/miraflores/photo2.jpg", alt: "Miraflores Photo 2", size: "w-1/2 h-64 md:h-96" },
+  { src: "/src/assets/canchas/comuna9/miraflores/photo3.jpg", alt: "Miraflores Photo 3", size: "w-1/2 h-64 md:h-96" },
+];
+---
+
+<BaseLayout title={title} image={gallery[0].src} description={canchaInfo.nombre}>
+  <section class="container p-4 max-w-2xl mx-auto">
+    <article class="w-full flex flex-col gap-4">
+      <EntryHeader entry={entry} showImage={false} />
+      <div class="flex flex-col gap-4 justify-center mb-2">
+        <div class="glass px-2 py-2 rounded-lg flex flex-col items-center justify-center">
+          <a href={gallery[0].src} target="_blank" rel="noopener noreferrer" class="contents">
+            <img
+              src={gallery[0].src}
+              alt={gallery[0].alt}
+              class={`rounded shadow object-cover ${gallery[0].size}`}
+              style="max-width:100%;"
+              loading="lazy"
+            />
+          </a>
+          <div class="mt-2 text-sm text-center">
+            <p><strong>Dirección:</strong> {canchaInfo.direccion}</p>
+            <p>
+              <strong>Reservas:</strong>
+              <a
+                href={`tel:${canchaInfo.reservas}`}
+                class="text-blue-600 font-bold underline ml-1"
+              >
+                {canchaInfo.reservas}
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="glass px-2 py-2 rounded-lg flex gap-4 items-center justify-center">
+          <a href={gallery[1].src} target="_blank" rel="noopener noreferrer" class="contents">
+            <img
+              src={gallery[1].src}
+              alt={gallery[1].alt}
+              class="object-cover w-1/2 h-64 md:h-96"
+              style="max-width:50%; flex: 1 1 0;"
+              loading="lazy"
+            />
+          </a>
+          <a href={gallery[2].src} target="_blank" rel="noopener noreferrer" class="contents">
+            <img
+              src={gallery[2].src}
+              alt={gallery[2].alt}
+              class=" object-cover w-1/2 h-64 md:h-96"
+              style="max-width:50%; flex: 1 1 0;"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <section class="glass px-4 py-2 rounded-lg text-base mb-2">
+          <p><strong>Historia:</strong> {canchaInfo.historia}</p>
+        </section>
+        <section class="glass px-4 py-2 rounded-lg text-base mb-2">
+          <p class="mt-2"><strong>Equipos destacados:</strong></p>
+          <ul class="list-disc list-inside mb-2">
+            {canchaInfo.equipos.map(equipo => (
+              <li>{equipo}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

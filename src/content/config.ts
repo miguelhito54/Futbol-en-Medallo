@@ -24,33 +24,28 @@ const social = z.object({
   youtube: z.string().optional(),
 });
 
-const about = defineCollection({
-  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/about" }),
-  schema: ({ image }) =>
-    searchable.extend({
-      image: image().optional(),
-      imageAlt: z.string().default(""),
-    }),
-});
-
 const authors = defineCollection({
   loader: glob({
     pattern: "**\/[^_]*.{md,mdx}",
     base: "./src/content/authors",
   }),
   schema: ({ image }) =>
-    searchable.extend({
+    z.object({
       email: z.string().optional(),
       image: image().optional(),
       imageAlt: z.string().default(""),
       social: social.optional(),
+      title: z.string(),
+      description: z.string().optional(),
+      autodescription: z.boolean().default(true),
+      draft: z.boolean().default(false),
     }),
 });
 
 const blog = defineCollection({
   loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/blog" }),
   schema: ({ image }) =>
-    searchable.extend({
+    z.object({
       date: z.date().optional(),
       image: image().optional(),
       imageAlt: z.string().default(""),
@@ -59,19 +54,27 @@ const blog = defineCollection({
       tags: z.array(z.string()).optional(),
       complexity: z.number().default(1),
       hideToc: z.boolean().default(false),
+      title: z.string(),
+      description: z.string().optional(),
+      autodescription: z.boolean().default(true),
+      draft: z.boolean().default(false),
     }),
 });
 
 const docs = defineCollection({
   loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/docs" }),
   schema: ({ image }) =>
-    searchable.extend({
+    z.object({
       pubDate: z.date().optional(),
       modDate: z.date().optional(),
       image: image().optional(),
       imageAlt: z.string().default(""),
       hideToc: z.boolean().default(false),
       hideNav: z.boolean().default(false),
+      title: z.string(),
+      description: z.string().optional(),
+      autodescription: z.boolean().default(true),
+      draft: z.boolean().default(false),
     }),
 });
 
@@ -92,83 +95,13 @@ const home = defineCollection({
     }),
 });
 
-const indexCards = defineCollection({
-  loader: glob({
-    pattern: "-index.{md,mdx}",
-    base: "./src/content/index-cards",
-  }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    cards: z.array(z.string()),
-  }),
-});
-
-const poetry = defineCollection({
-  loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/poetry" }),
-  schema: ({ image }) =>
-    searchable.extend({
-      date: z.date().optional(),
-      image: image().optional(),
-      imageAlt: z.string().default(""),
-      author: reference("authors").optional(),
-    }),
-});
-
-const portfolio = defineCollection({
-  loader: glob({
-    pattern: "-index.{md,mdx}",
-    base: "./src/content/portfolio",
-  }),
-  schema: searchable.extend({
-    projects: z.array(
-      z.object({
-        title: z.string(),
-        github: z.string().optional(),
-        technologies: z.array(z.string()).optional(),
-        content: z.array(z.string()).optional(),
-      }),
-    ),
-  }),
-});
-
-const recipes = defineCollection({
-  loader: glob({
-    pattern: "**\/[^_]*.{md,mdx}",
-    base: "./src/content/recipes",
-  }),
-  schema: ({ image }) =>
-    searchable.extend({
-      date: z.date().optional(),
-      image: image().optional(),
-      imageAlt: z.string().default(""),
-      author: reference("authors").optional(),
-      prepTime: z.number().optional(),
-      servings: z.number().optional(),
-      diet: z.string().optional(),
-      ingredients: z
-        .object({
-          list: z.array(z.string()),
-          qty: z.array(z.string()),
-        })
-        .optional(),
-      instructions: z.array(z.string()).optional(),
-      notes: z.array(z.string()).optional(),
-    }),
-});
-
-const terms = defineCollection({
-  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/terms" }),
-  schema: searchable,
-});
-
 const canchas = defineCollection({
   loader: glob({
-    pattern: "**\/comuna*\/[^_]*.{md,mdx}", // Updated to include subdirectories like comuna1, comuna2, etc.
+    pattern: "**\/comuna*\/[^_]*.{md,mdx}",
     base: "./src/content/canchas",
   }),
   schema: ({ image }) =>
-    searchable.extend({
+    z.object({
       date: z.date().optional(),
       image: image().optional(),
       imageAlt: z.string().default(""),
@@ -177,20 +110,17 @@ const canchas = defineCollection({
       location: z.string().optional(),
       notableTeams: z.array(z.string()).optional(),
       history: z.string().optional(),
+      title: z.string(),
+      autodescription: z.boolean().default(true),
+      draft: z.boolean().default(false),
     }),
 });
 
 // Export collections
 export const collections = {
-  about,
   authors,
   blog,
   docs,
   home,
-  indexCards,
-  poetry,
-  portfolio,
-  recipes,
-  terms,
   canchas,
 };
