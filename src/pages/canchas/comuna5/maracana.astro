@@ -4,38 +4,70 @@ import type { CanchasEntry } from "@/types";
 import { getEntry, render } from "astro:content";
 import EntryHeader from "@components/common/EntryHeader.astro";
 
-const entry = await getEntry("canchas", "comuna5/maracana") as CanchasEntry;
+const entry = (await getEntry("canchas", "comuna5/maracana")) as CanchasEntry;
 const { Content, headings } = await render(entry);
 const { title } = entry.data;
 
 // Custom cancha data for Comuna 5 - La Maracaná | Castilla
 const canchaInfo = {
-  nombre: "La Maracaná | Cancha La Maracaná Barrio Castilla",
-  direccion: "Calle 96 con Carrera 65, Barrio Castilla, Comuna 5 - Castilla, Medellín, Antioquia",
+  nombre: "| Castilla | La Maracaná",
+  direccion:
+    "Calle 96 con Carrera 65, Barrio Castilla, Comuna 5 - Castilla, Medellín, Antioquia",
   reservas: "3699000",
   historia:
     "La Cancha La Maracaná, fundada en 1972 gracias a la donación de terrenos por la familia Arango de Cock, es un ícono del fútbol barrial en Medellín. Durante muchos años fue de arenilla, pero eso no impidió que grandes del fútbol colombiano se formaran en este lugar, convirtiéndola en un símbolo de la pasión futbolera del barrio Castilla.",
   equipos: [
-    "Clubes barriales y equipos juveniles que han sido semillero de talentos destacados en el fútbol colombiano."
-  ]
+    "Clubes barriales y equipos juveniles que han sido semillero de talentos destacados en el fútbol colombiano.",
+  ],
 };
 
 const gallery = [
-  { src: "/src/assets/canchas/comuna5/maracana/photo2.jpg", alt: "La Maracaná Photo 1", size: "w-full h-96 md:h-[32rem]" },
-  { src: "/src/assets/canchas/comuna5/maracana/photo1.jpg", alt: "La Maracaná Photo 2", size: "w-1/2 h-64 md:h-96" },
-  { src: "/src/assets/canchas/comuna5/maracana/photo3.jpg", alt: "La Maracaná Photo 3", size: "w-1/2 h-64 md:h-96" },
-  { src: "/src/assets/canchas/comuna5/maracana/photo4.jpg", alt: "La Maracaná Photo 4", size: "w-full h-72 md:h-[28rem]" },
-  { src: "/src/assets/canchas/comuna5/maracana/photo5.jpg", alt: "La Maracaná Photo 5", size: "w-full h-56 md:h-72" },
+  {
+    src: "/src/assets/canchas/comuna5/maracana/photo2.jpg",
+    alt: "La Maracaná Photo 1",
+    size: "w-full h-96 md:h-[32rem]",
+  },
+  {
+    src: "/src/assets/canchas/comuna5/maracana/photo1.jpg",
+    alt: "La Maracaná Photo 2",
+    size: "w-1/2 h-64 md:h-96",
+  },
+  {
+    src: "/src/assets/canchas/comuna5/maracana/photo3.jpg",
+    alt: "La Maracaná Photo 3",
+    size: "w-1/2 h-64 md:h-96",
+  },
+  {
+    src: "/src/assets/canchas/comuna5/maracana/photo4.jpg",
+    alt: "La Maracaná Photo 4",
+    size: "w-full h-72 md:h-[28rem]",
+  },
+  {
+    src: "/src/assets/canchas/comuna5/maracana/photo5.jpg",
+    alt: "La Maracaná Photo 5",
+    size: "w-full h-56 md:h-72",
+  },
 ];
 ---
 
-<BaseLayout title={title} image={gallery[0].src} description={canchaInfo.nombre}>
+<BaseLayout
+  title={title}
+  image={gallery[0].src}
+  description={canchaInfo.nombre}
+>
   <section class="container p-4 max-w-2xl mx-auto">
     <article class="w-full flex flex-col gap-4">
       <EntryHeader entry={entry} showImage={false} />
       <div class="flex flex-col gap-4 justify-center mb-2">
-        <div class="glass px-2 py-2 rounded-lg flex flex-col items-center justify-center">
-          <a href={gallery[0].src} target="_blank" rel="noopener noreferrer" class="w-full">
+        <div
+          class="glass px-2 py-2 rounded-lg flex flex-col items-center justify-center relative"
+        >
+          <a
+            href={gallery[0].src}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contents"
+          >
             <img
               src={gallery[0].src}
               alt={gallery[0].alt}
@@ -43,19 +75,52 @@ const gallery = [
               style="width:100%; height:auto; aspect-ratio: 3/1; object-fit:cover; max-width:100%;"
               loading="lazy"
             />
+            <div
+              class="absolute inset-0 flex items-center justify-center bg-black/30"
+            >
+              <h1
+                class="text-2xl md:text-3xl font-bold text-white drop-shadow-lg text-center"
+              >
+                {canchaInfo.nombre}
+              </h1>
+            </div>
           </a>
           <div class="mt-2 text-sm text-center">
             <p>
               <strong>
-                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block mr-1" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-                Dirección:
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline-block mr-1"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  ><path
+                    stroke-width="2"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
+                  ></path></svg
+                >
+                 Dirección:
               </strong>
-              {canchaInfo.direccion}
+              <span style="color:#6b7280;"> {canchaInfo.direccion}</span>
             </p>
             <p>
               <strong>
-                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block mr-1" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.35.26 2.67.76 3.88a1 1 0 0 1-.21 1.11l-2.2 2.2z"/></svg>
-                Reservas:
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline-block mr-1"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  ><path
+                    stroke-width="2"
+                    d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.35.26 2.67.76 3.88a1 1 0 0 1-.21 1.11l-2.2 2.2z"
+                  ></path></svg
+                >
+                 Reservas:
               </strong>
               <a
                 href={`tel:${canchaInfo.reservas}`}
@@ -66,8 +131,15 @@ const gallery = [
             </p>
           </div>
         </div>
-        <div class="glass px-2 py-2 rounded-lg flex gap-4 items-center justify-center">
-          <a href={gallery[1].src} target="_blank" rel="noopener noreferrer" class="contents">
+        <div
+          class="glass px-2 py-2 rounded-lg flex gap-4 items-center justify-center"
+        >
+          <a
+            href={gallery[1].src}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contents"
+          >
             <img
               src={gallery[1].src}
               alt={gallery[1].alt}
@@ -76,7 +148,12 @@ const gallery = [
               loading="lazy"
             />
           </a>
-          <a href={gallery[2].src} target="_blank" rel="noopener noreferrer" class="contents">
+          <a
+            href={gallery[2].src}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contents"
+          >
             <img
               src={gallery[2].src}
               alt={gallery[2].alt}
@@ -86,8 +163,15 @@ const gallery = [
             />
           </a>
         </div>
-        <div class="glass px-2 py-2 rounded-lg flex items-center justify-center">
-          <a href={gallery[3].src} target="_blank" rel="noopener noreferrer" class="w-full">
+        <div
+          class="glass px-2 py-2 rounded-lg flex items-center justify-center"
+        >
+          <a
+            href={gallery[3].src}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contents"
+          >
             <img
               src={gallery[3].src}
               alt={gallery[3].alt}
@@ -97,26 +181,53 @@ const gallery = [
             />
           </a>
         </div>
-        <div class="glass px-2 py-2 rounded-lg flex items-center justify-center">
-          <a href={gallery[4].src} target="_blank" rel="noopener noreferrer" class="w-full">
+        <section class="glass px-4 py-2 rounded-lg text-base mb-2 relative">
+          <h2 class="text-xl font-bold mb-4 text-gray-800 text-center relative">
+            <span
+              class="relative historia-hover-target group inline-block text-center"
+            >
+              <span
+                class="absolute -top-24 left-1/2 -translate-x-1/2 z-30 hidden group-hover:inline-block"
+                style="min-width:120px; max-width:180px;"
+              >
+                <img
+                  src="/src/assets/profile/cock.jpeg"
+                  alt="Donación familia Arango de Cock"
+                  class="rounded shadow-lg border border-gray-200 bg-white"
+                  style="width:100%;height:auto;max-width:160px;"
+                />
+              </span>
+               Historia
+            </span>
+          </h2>
+          <p class="relative z-10">
+            {canchaInfo.historia}
+          </p>
+        </section>
+        <div
+          class="glass px-2 py-2 rounded-lg flex items-center justify-center"
+        >
+          <a
+            href={gallery[4].src}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contents"
+          >
             <img
               src={gallery[4].src}
               alt={gallery[4].alt}
-              class="rounded object-cover w-full h-56 md:h-72"
-              style="max-width:100%;"
+              class="rounded object-cover object-[center_35%] w-full h-56 md:h-72"
+              style="object-fit:cover; object-position:center 35%; max-width:100%;"
               loading="lazy"
             />
           </a>
         </div>
         <section class="glass px-4 py-2 rounded-lg text-base mb-2">
-          <p><strong>Historia:</strong> {canchaInfo.historia}</p>
-        </section>
-        <section class="glass px-4 py-2 rounded-lg text-base mb-2">
-          <p class="mt-2"><strong>Equipos destacados:</strong></p>
+          <h2 class="text-xl font-bold mb-4 text-gray-800 text-center">
+            Equipos destacados
+          </h2>
           <ul class="list-disc list-inside mb-2">
-            {canchaInfo.equipos.map(equipo => (
-              <li>{equipo}</li>
-            ))}
+            {canchaInfo.equipos.map((equipo) => <li>{equipo}</li>)}
           </ul>
         </section>
       </div>

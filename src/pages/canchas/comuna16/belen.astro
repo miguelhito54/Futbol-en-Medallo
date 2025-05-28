@@ -24,6 +24,14 @@ const gallery = [
   { src: "/src/assets/canchas/comuna16/belen/photo1.jpg", alt: "Belén Photo 1", size: "w-full h-96 md:h-[32rem]" },
   { src: "/src/assets/canchas/comuna16/belen/photo2.jpg", alt: "Belén Photo 2", size: "w-1/2 h-64 md:h-96" },
   { src: "/src/assets/canchas/comuna16/belen/photo3.jpg", alt: "Belén Photo 3", size: "w-1/2 h-64 md:h-96" },
+  { src: "/src/assets/canchas/comuna16/belen/photo4.jpg", alt: "Belén Photo 4", size: "w-full h-56 md:h-72" },
+  { src: "/src/assets/canchas/comuna16/belen/photo5.jpg", alt: "Belén Photo 5", size: "w-1/2 h-56 md:h-72" },
+  { src: "/src/assets/canchas/comuna16/belen/photo6.jpg", alt: "Belén Photo 6", size: "w-1/2 h-56 md:h-72" },
+  { src: "/src/assets/canchas/comuna16/belen/photo7.jpg", alt: "Belén Photo 7", size: "w-full h-40 md:h-56" },
+  { src: "/src/assets/canchas/comuna16/belen/photo8.jpg", alt: "Belén Photo 8", size: "w-1/2 h-40 md:h-56" },
+  { src: "/src/assets/canchas/comuna16/belen/photo9.jpg", alt: "Belén Photo 9", size: "w-1/2 h-40 md:h-56" },
+  { src: "/src/assets/canchas/comuna16/belen/photo10.jpg", alt: "Belén Photo 10", size: "w-full h-40 md:h-56" },
+  { src: "/src/assets/canchas/comuna16/belen/photo11.jpg", alt: "Belén Photo 11", size: "w-full h-40 md:h-56" },
 ];
 ---
 
@@ -32,20 +40,57 @@ const gallery = [
     <article class="w-full flex flex-col gap-4">
       <EntryHeader entry={entry} showImage={false} />
       <div class="flex flex-col gap-4 justify-center mb-2">
-        <div class="glass px-2 py-2 rounded-lg flex flex-col items-center justify-center">
-          <a href={gallery[0].src} target="_blank" rel="noopener noreferrer" class="contents">
-            <img
-              src={gallery[0].src}
-              alt={gallery[0].alt}
-              class={`rounded shadow object-cover ${gallery[0].size}`}
-              style="max-width:100%;"
-              loading="lazy"
-            />
-          </a>
-          <div class="mt-2 text-sm text-center">
-            <p><strong>Dirección:</strong> {canchaInfo.direccion}</p>
+        {/* Hero image with overlay title and info */}
+        <div class="relative rounded-lg overflow-hidden mb-2">
+          <img
+            src={gallery[0].src}
+            alt={gallery[0].alt}
+            class="w-full h-64 md:h-96 object-cover brightness-90"
+            style="max-width:100%;"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/30">
+            <h1 class="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">{canchaInfo.nombre}</h1>
+          </div>
+          <div class="mt-2 text-sm text-center relative z-10">
             <p>
-              <strong>Reservas:</strong>
+              <strong>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline-block mr-1"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-width="2"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
+                  />
+                </svg>
+                Dirección:
+              </strong>
+              <span style="color:#6b7280;"> {canchaInfo.direccion}</span>
+            </p>
+            <p>
+              <strong>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline-block mr-1"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-width="2"
+                    d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.35.26 2.67.76 3.88a1 1 0 0 1-.21 1.11l-2.2 2.2z"
+                  />
+                </svg>
+                Reservas:
+              </strong>
               <a
                 href={`tel:${canchaInfo.reservas}`}
                 class="text-blue-600 font-bold underline ml-1"
@@ -55,31 +100,110 @@ const gallery = [
             </p>
           </div>
         </div>
-        <div class="glass px-2 py-2 rounded-lg flex gap-4 items-center justify-center">
-          <a href={gallery[1].src} target="_blank" rel="noopener noreferrer" class="contents">
+        {/* Gallery: creative UX, max 2 per glass, some singles for panoramic */}
+        <div class="glass px-2 py-2 rounded-lg flex flex-col md:flex-row gap-4 items-center justify-center">
+          <a href={gallery[1].src} target="_blank" rel="noopener noreferrer" class="contents w-full md:w-1/2">
             <img
               src={gallery[1].src}
               alt={gallery[1].alt}
-              class="object-cover w-1/2 h-64 md:h-96"
-              style="max-width:50%; flex: 1 1 0;"
+              class="rounded object-cover w-full h-40 md:h-64"
+              style="max-width:100%; object-fit:cover;"
               loading="lazy"
             />
           </a>
-          <a href={gallery[2].src} target="_blank" rel="noopener noreferrer" class="contents">
+          <a href={gallery[2].src} target="_blank" rel="noopener noreferrer" class="contents w-full md:w-1/2">
             <img
               src={gallery[2].src}
               alt={gallery[2].alt}
-              class=" object-cover w-1/2 h-64 md:h-96"
-              style="max-width:50%; flex: 1 1 0;"
+              class="rounded object-cover w-full h-40 md:h-64"
+              style="max-width:100%; object-fit:cover;"
               loading="lazy"
             />
           </a>
         </div>
+        <div class="glass px-2 py-2 rounded-lg flex flex-col md:flex-row gap-4 items-center justify-center">
+          <a href={gallery[3].src} target="_blank" rel="noopener noreferrer" class="contents w-full md:w-1/2">
+            <img
+              src={gallery[3].src}
+              alt={gallery[3].alt}
+              class="rounded object-cover w-full h-56 md:h-72"
+              style="max-width:100%; object-fit:cover;"
+              loading="lazy"
+            />
+          </a>
+          <a href={gallery[4].src} target="_blank" rel="noopener noreferrer" class="contents w-full md:w-1/2">
+            <img
+              src={gallery[4].src}
+              alt={gallery[4].alt}
+              class="rounded object-cover w-full h-56 md:h-72"
+              style="max-width:100%; object-fit:cover;"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <div class="glass px-2 py-2 rounded-lg flex flex-col md:flex-row gap-4 items-center justify-center">
+          <a href={gallery[5].src} target="_blank" rel="noopener noreferrer" class="contents w-full md:w-1/2">
+            <img
+              src={gallery[5].src}
+              alt={gallery[5].alt}
+              class="rounded object-cover w-full h-56 md:h-72"
+              style="max-width:100%; object-fit:cover;"
+              loading="lazy"
+            />
+          </a>
+          <a href={gallery[6].src} target="_blank" rel="noopener noreferrer" class="contents w-full md:w-1/2">
+            <img
+              src={gallery[6].src}
+              alt={gallery[6].alt}
+              class="rounded object-cover w-full h-40 md:h-56"
+              style="max-width:100%; object-fit:cover;"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        {/* Panoramic/single images */}
+        <div class="glass px-2 py-2 rounded-lg flex items-center justify-center">
+          <a href={gallery[7].src} target="_blank" rel="noopener noreferrer" class="contents w-full">
+            <img
+              src={gallery[7].src}
+              alt={gallery[7].alt}
+              class="rounded object-cover w-full h-40 md:h-56"
+              style="max-width:100%; object-fit:cover;"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <div class="glass px-2 py-2 rounded-lg flex items-center justify-center">
+          <a href={gallery[8].src} target="_blank" rel="noopener noreferrer" class="contents w-full">
+            <img
+              src={gallery[8].src}
+              alt={gallery[8].alt}
+              class="rounded object-cover w-full h-40 md:h-56"
+              style="max-width:100%; object-fit:cover;"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <div class="glass px-2 py-2 rounded-lg flex items-center justify-center">
+          <a href={gallery[10].src} target="_blank" rel="noopener noreferrer" class="contents w-full">
+            <img
+              src={gallery[10].src}
+              alt={gallery[10].alt}
+              class="rounded object-cover w-full h-40 md:h-56"
+              style="max-width:100%; object-fit:cover;"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        {/* Historia y equipos destacados */}
         <section class="glass px-4 py-2 rounded-lg text-base mb-2">
-          <p><strong>Historia:</strong> {canchaInfo.historia}</p>
+          <h2 class="text-xl font-bold mb-4 text-gray-800 text-center">Historia</h2>
+          <p>
+            {canchaInfo.historia}
+          </p>
         </section>
         <section class="glass px-4 py-2 rounded-lg text-base mb-2">
-          <p class="mt-2"><strong>Equipos destacados:</strong></p>
+          <h2 class="text-xl font-bold mb-4 text-gray-800 text-center">Equipos destacados</h2>
           <ul class="list-disc list-inside mb-2">
             {canchaInfo.equipos.map(equipo => (
               <li>{equipo}</li>

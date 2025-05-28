@@ -1,8 +1,8 @@
 ---
-image: "@assets/astrogon-star.svg"
-imageAlt: Golpaisa Logo
-title: Golpaisa
-content: A rapidly-customizable template for a blog, documentation, and more.
+image: "@assets/profile/pelota.png"
+imageAlt: Fut Logo
+title: Futbol en Medallo
+content: .
 button:
   label: See the Code
   link: https://github.com/astrogon/astrogon
