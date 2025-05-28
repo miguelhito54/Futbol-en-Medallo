@@ -7,14 +7,11 @@ import type { CanchasEntry } from "@/types";
 const entryIndex = (await getIndex("canchas")) as CanchasEntry;
 const entries = (await getEntries("canchas", sortByDate)) as CanchasEntry[];
 
-const { slug } = Astro.params;
+// Only show rompoy.md for comuna1
+const currentEntries = entries.filter((e) => e.id === "comuna1/rompoy");
 
-const entriesPerPage = 1;
-const currentPageIndex = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
-const pageCount = Math.ceil(entries.length / entriesPerPage);
-const indexOfLastEntry = currentPageIndex * entriesPerPage;
-const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-const currentEntries = entries.slice(indexOfFirstEntry, indexOfLastEntry);
+const currentPageIndex = 1;
+const pageCount = 1;
 ---
 
 <CollectionLayout
