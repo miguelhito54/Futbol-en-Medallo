@@ -36,5 +36,12 @@ export default defineConfig({
       } 
     },
     extendDefaultPlugins: true
+  }, vite: {
+    resolve: {
+      alias: {
+        "@components": path.resolve("./src/components"),
+        "@shortcodes": path.resolve("./src/shortcodes"),
+      },
+    },
   },
 });
